@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Apply theme before first paint to prevent flash -->
+  <script>
+    (function () {
+      var theme = localStorage.getItem('dashboard_theme');
+      document.documentElement.setAttribute('data-theme',
+        theme === 'dark' ? 'dark' : 'light');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <span class="app-title">✦ Dashboard</span>
+    <button id="theme-toggle" class="btn-icon" aria-label="Toggle light/dark theme">
+      <span id="theme-icon">🌙</span>
+    </button>
+  </header>
+
+  <main class="app-main">
+
+    <!-- GREETING WIDGET -->
+    <section id="greeting" class="widget widget--greeting" aria-label="Greeting">
+      <div class="greeting-clock">
+        <span id="greeting-time" class="clock-time">00:00:00</span>
+        <span id="greeting-date" class="clock-date">Loading...</span>
+      </div>
+      <p id="greeting-text" class="greeting-text">Hello!</p>
+      <div class="greeting-name-form">
+        <input
+          id="name-input"
+          class="input"
+          type="text"
+          placeholder="Enter your name..."
+          maxlength="50"
+          aria-label="Your display name"
+        />
+        <button id="name-save" class="btn btn-primary">Save</button>
+      </div>
+      <p id="name-error" class="error-msg" aria-live="polite"></p>
+    </section>
+
+    <!-- MIDDLE ROW: TIMER + TODO -->
+    <div class="middle-row">
+
+      <!-- FOCUS TIMER WIDGET -->
+      <section id="timer" class="widget widget--timer" aria-label="Focus timer">
+        <h2 class="widget-title">Focus Timer</h2>
+        <div id="timer-display" class="timer-display" aria-live="polite" aria-atomic="true">25:00</div>
+        <p id="timer-done-msg" class="timer-done-msg" aria-live="polite"></p>
+        <div class="timer-controls">
+          <button id="timer-start" class="btn btn-primary">▶ Start</button>
+          <button id="timer-stop"  class="btn btn-secondary">⏸ Stop</button>
+          <button id="timer-reset" class="btn btn-secondary">↺ Reset</button>
+        </div>
+        <div class="timer-duration-form">
+          <label for="duration-input" class="label">Duration (min):</label>
+          <input
+            id="duration-input"
+            class="input input--small"
+            type="number"
+            min="1"
+            max="60"
+            value="25"
+            aria-label="Pomodoro duration in minutes"
+          />
+          <button id="duration-save" class="btn btn-secondary">Set</button>
+        </div>
+        <p id="duration-error" class="error-msg" aria-live="polite"></p>
+      </section>
+
+      <!-- TO-DO LIST WIDGET -->
+      <section id="todo" class="widget widget--todo" aria-label="To-do list">
+        <h2 class="widget-title">To-Do List</h2>
+        <div class="todo-add-form">
+          <input
+            id="todo-input"
+            class="input"
+            type="text"
+            placeholder="Add a task..."
+            maxlength="500"
+            aria-label="New task description"
+          />
+          <button id="todo-add" class="btn btn-primary">Add</button>
+        </div>
+        <div class="todo-actions">
+          <button id="todo-sort" class="btn btn-secondary btn-small" aria-label="Sort tasks: incomplete first">⇅ Sort</button>
+        </div>
+        <p id="todo-error" class="error-msg" aria-live="polite"></p>
+        <ul id="todo-list" class="todo-list" role="list" aria-label="Task list"></ul>
+      </section>
+
+    </div><!-- end middle-row -->
+
+    <!-- QUICK LINKS WIDGET -->
+    <section id="links" class="widget widget--links" aria-label="Quick links">
+      <h2 class="widget-title">Quick Links</h2>
+      <div class="links-add-form">
+        <input
+          id="link-label"
+          class="input"
+          type="text"
+          placeholder="Label (e.g. YouTube)"
+          maxlength="50"
+          aria-label="Link label"
+        />
+        <input
+          id="link-url"
+          class="input"
+          type="url"
+          placeholder="https://..."
+          aria-label="Link URL"
+        />
+        <button id="link-add" class="btn btn-primary">Add Link</button>
+      </div>
+      <p id="links-error" class="error-msg" aria-live="polite"></p>
+      <div id="links-list" class="links-list" role="list" aria-label="Quick links list"></div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

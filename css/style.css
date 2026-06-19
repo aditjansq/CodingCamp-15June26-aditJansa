@@ -1,0 +1,516 @@
+/* ============================================================
+   DESIGN TOKENS — Light theme (default)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  --bg:            #f0f2f5;
+  --surface:       #ffffff;
+  --surface-hover: #f7f8fc;
+  --text-primary:  #1a1a2e;
+  --text-secondary:#555577;
+  --accent:        #4f46e5;
+  --accent-hover:  #4338ca;
+  --accent-muted:  #ede9fe;
+  --border:        #e2e4ec;
+  --error:         #dc2626;
+  --done-color:    #9ca3af;
+  --btn-primary-bg:#4f46e5;
+  --btn-primary-fg:#ffffff;
+  --btn-sec-bg:    #e8eaf6;
+  --btn-sec-fg:    #4f46e5;
+  --shadow:        0 2px 8px rgba(0,0,0,0.08);
+  --radius:        12px;
+  --radius-sm:     8px;
+}
+
+/* ============================================================
+   Dark theme
+   ============================================================ */
+[data-theme="dark"] {
+  --bg:            #0d0d14;
+  --surface:       #1a1a28;
+  --surface-hover: #22223a;
+  --text-primary:  #e8e8f0;
+  --text-secondary:#9090b0;
+  --accent:        #818cf8;
+  --accent-hover:  #a5b4fc;
+  --accent-muted:  #1e1e3a;
+  --border:        #2e2e46;
+  --error:         #f87171;
+  --done-color:    #555577;
+  --btn-primary-bg:#818cf8;
+  --btn-primary-fg:#0d0d14;
+  --btn-sec-bg:    #22223a;
+  --btn-sec-fg:    #818cf8;
+  --shadow:        0 2px 12px rgba(0,0,0,0.4);
+  --radius:        12px;
+  --radius-sm:     8px;
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.app-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.middle-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0.75rem 1rem;
+  }
+  .app-main {
+    padding: 1rem 1rem 2rem;
+  }
+  .middle-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   WIDGET CARD
+   ============================================================ */
+.widget {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.widget-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   GREETING WIDGET
+   ============================================================ */
+.widget--greeting {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.greeting-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.clock-time {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.clock-date {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.greeting-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.greeting-name-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   FOCUS TIMER WIDGET
+   ============================================================ */
+.widget--timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.timer-display.timer-done {
+  border-color: var(--accent);
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.timer-done-msg {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  min-height: 1.2em;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.timer-controls .btn {
+  flex: 1;
+  min-width: 60px;
+}
+
+.timer-duration-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   TO-DO LIST WIDGET
+   ============================================================ */
+.widget--todo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-add-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo-add-form .input {
+  flex: 1;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 4px;
+}
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-hover);
+  transition: background-color 0.15s;
+}
+
+.todo-item:hover {
+  background: var(--accent-muted);
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.95rem;
+  word-break: break-word;
+  color: var(--text-primary);
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: var(--done-color);
+}
+
+.todo-edit-input {
+  flex: 1;
+  font-size: 0.95rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.todo-item-actions {
+  display: flex;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   QUICK LINKS WIDGET
+   ============================================================ */
+.widget--links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.links-add-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.links-add-form .input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--accent-muted);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--accent);
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.link-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0 0 0 0.1rem;
+  transition: color 0.15s;
+}
+
+.link-delete:hover {
+  color: var(--error);
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s, background-color 0.25s;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input--small {
+  width: 64px;
+  text-align: center;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--btn-sec-bg);
+  color: var(--btn-sec-fg);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--accent-muted);
+}
+
+.btn-small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.btn-icon {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.35rem 0.6rem;
+  transition: background-color 0.15s;
+  color: var(--text-primary);
+}
+
+.btn-icon:hover {
+  background: var(--surface-hover);
+}
+
+/* ============================================================
+   VALIDATION / ERROR MESSAGES
+   ============================================================ */
+.error-msg {
+  font-size: 0.8rem;
+  color: var(--error);
+  min-height: 1.1em;
+  transition: opacity 0.2s;
+}
